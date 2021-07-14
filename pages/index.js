@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Body from '../components/Body';
+import Footer from '../components/Footer';
 
 export default function Home({ NewConfirmed, UpdateDate }) {
     return (
@@ -11,17 +12,11 @@ export default function Home({ NewConfirmed, UpdateDate }) {
             </Head>
 
             <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-                <Body NewConfirmed={NewConfirmed} UpdateDate={UpdateDate}/>
+                <Body NewConfirmed={NewConfirmed} UpdateDate={UpdateDate} />
             </main>
 
             <footer className="flex items-center justify-center w-full h-24 font-light text-white drop-shadow-md">
-                <div>
-                    <p>
-                        Made by Phatsanphon Nakaranurak |
-                        API by <a href='https://www.kidkarnmai.com/'>kidkarnmai.com</a> |
-                        Data from <a href='https://data.go.th/dataset/covid-19-daily'>data.go.th</a>
-                    </p>
-                </div>
+                <Footer />
             </footer>
         </div>
     )
