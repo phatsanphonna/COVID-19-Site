@@ -41,7 +41,7 @@ export default function Home({ data }) {
     )
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
     const URL = 'https://covid19.th-stat.com/json/covid19v2/getTodayCases.json'
     const response = await axios.get(
         URL, {
