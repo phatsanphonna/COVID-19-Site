@@ -36,8 +36,15 @@ export default function Home({ NewConfirmed, UpdateDate }) {
 }
 
 export async function getStaticProps(context) {
-    const response = await fetch('https://covid19.th-stat.com/json/covid19v2/getTodayCases.json')
+    const response = await fetch('https://covid19.th-stat.com/json/covid19v2/getTodayCases.json', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    
     const data = await response.json()
+    console.log(data);
 
     if (!data) {
         return {
