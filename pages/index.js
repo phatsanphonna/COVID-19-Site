@@ -1,5 +1,23 @@
-import axios from 'axios'
 import Head from 'next/head'
+
+export async function getStaticProps() {
+    const URL = 'https://covid19.th-stat.com/json/covid19v2/getTodayCases.json'
+
+    const response = await fetch(URL)
+    const data = await response.json()
+
+    console.log(data);
+
+    if (!data) {
+        return {
+            notFound: true,
+        }
+    }
+
+    return {
+        props: data
+    }
+}
 
 export default function Home({ NewConfirmed, UpdateDate }) {
     const confirmed = NewConfirmed.toLocaleString()
@@ -38,22 +56,3 @@ export default function Home({ NewConfirmed, UpdateDate }) {
     )
 }
 
-export async function getStaticProps(context) {
-    const URL = 'https://covid19.th-stat.com/json/covid19v2/getTodayCases.json'
-
-    const response = await fetch(URL)
-    const data = await response.json()
-
-    console.log(data);
-
-    if (!data) {
-        return {
-            notFound: true,
-        }
-    }
-
-    return {
-        props: data,
-        fallback: true
-    }
-}
