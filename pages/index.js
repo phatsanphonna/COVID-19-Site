@@ -22,7 +22,7 @@ export default function Home({ NewConfirmed, UpdateDate }) {
     )
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
     const URL = 'https://covid19.th-stat.com/json/covid19v2/getTodayCases.json'
 
     const response = await fetch(URL, {
