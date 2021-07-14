@@ -6,7 +6,7 @@ export default function Home({ NewConfirmed, UpdateDate }) {
     return (
         <div className="root flex flex-col items-center justify-center min-h-screen py-2">
             <Head>
-                <title>วันนี้ติดโควิดกันกี่คน</title>
+                <title>วันนี้ติดกันกี่คน</title>
                 <meta property="og:title" content='COVID-19 Stats' />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
@@ -23,7 +23,7 @@ export default function Home({ NewConfirmed, UpdateDate }) {
 }
 
 export const getStaticProps = async () => {
-    const URL = 'https://covid19.phatsanphon.site/api/getTodayCases'
+    const URL = 'https://covid19.th-stat.com/json/covid19v2/getTodayCases.json'
 
     const response = await fetch(URL, {
         headers: {
