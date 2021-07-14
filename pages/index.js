@@ -8,7 +8,7 @@ export default function Home({ NewConfirmed, UpdateDate }) {
     return (
         <div className="root flex flex-col items-center justify-center min-h-screen py-2">
             <Head>
-                <title>โควิดวันนี้ติดกันกี่คน</title>]
+                <title>โควิดวันนี้ติดกันกี่คน</title>
                 <meta property="og:title" content='COVID-19 Stats' />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
