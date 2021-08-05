@@ -1,22 +1,19 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react';
-// import Body from '../components/Body';
+import Body from '../components/Body';
 import Footer from '../components/Footer';
 
 export default function Home() {
-    const [todayCasesConfirmed, setTodayCasesConfirmed] = useState(0)
+    const [todayCasesConfirmed, setTodayCasesConfirmed] = useState()
     const [updateDate, setUpdateDate] = useState()
 
     useEffect(async () => {
-        let response = await fetch('https://covid19.th-stat.com/json/covid19v2/getTodayCases.json')
-        response = await response.json()
+        const response = await fetch('https://static.easysunday.com/covid-19/getTodayCases.json')
+        const data = await response.json()
 
-        let confirmed = response.NewConfirmed
-        let date = response['UpdateDate'].split(' ')
-
-        setTodayCasesConfirmed(confirmed.toLocaleString())
-        setUpdateDate(`${date[0]} เวลา ${date[1]}`)
-    })
+        setTodayCasesConfirmed(data.todayCases.toLocaleString('th'))
+        setUpdateDate(new Date(data.updated).toLocaleDateString('th'))
+    }, [])
 
     return (
         <div className="root flex flex-col items-center justify-center min-h-screen py-2">
@@ -42,25 +39,3 @@ export default function Home() {
         </div>
     )
 }
-
-// export const getStaticProps = async () => {
-//     const URL = 'https://covid19.th-stat.com/json/covid19v2/getTodayCases.json'
-
-//     const response = await fetch(URL, {
-//         headers: {
-//             'Content-Type': 'application/json',
-//         }
-//     })
-//     const data = await response.json()
-//     console.log(data);
-
-//     if (!data) {
-//         return {
-//             notFound: true,
-//         }
-//     }
-
-//     return {
-//         props: data
-//     }
-// }
