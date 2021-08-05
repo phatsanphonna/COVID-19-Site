@@ -3,16 +3,13 @@ import { useEffect, useState } from 'react';
 import Body from '../components/Body';
 import Footer from '../components/Footer';
 
-export default function Home() {
+export default function Home({ todayCases, updated }) {
     const [todayCasesConfirmed, setTodayCasesConfirmed] = useState()
     const [updateDate, setUpdateDate] = useState()
 
     useEffect(async () => {
-        const response = await fetch('https://static.easysunday.com/covid-19/getTodayCases.json')
-        const data = await response.json()
-
-        setTodayCasesConfirmed(data.todayCases.toLocaleString('th'))
-        setUpdateDate(new Date(data.updated).toLocaleDateString('th'))
+        setTodayCasesConfirmed(todayCases)
+        setUpdateDate(updated)
     }, [])
 
     return (
@@ -38,4 +35,26 @@ export default function Home() {
             </footer>
         </div>
     )
+}
+
+export const getStaticProps = async () => {
+    try {
+        const response = await fetch('https://static.easysunday.com/covid-19/getTodayCases.json')
+        const data = await response.json()
+
+        if (!data) {
+            return {
+                notFound: true,
+            }
+        }
+
+        return {
+            props: {
+                todayCases: data.todayCases.toLocaleString('th'),
+                updated: new Date(data.updated).toLocaleDateString('th')
+            }, // will be passed to the page component as props
+        }
+    } catch (e) {
+        console.log(e)
+    }
 }
