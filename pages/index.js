@@ -37,7 +37,7 @@ export default function Home({ todayCases, updated }) {
     )
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
     try {
         const response = await fetch('https://static.easysunday.com/covid-19/getTodayCases.json')
         const data = await response.json()
